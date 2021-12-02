@@ -1,0 +1,12 @@
+thumb_adduction_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: thumb_adduction
+    joint_speed: 5
+    motor:
+        id: 34
+        init: 2048
+        min: 0
+        max: 4095

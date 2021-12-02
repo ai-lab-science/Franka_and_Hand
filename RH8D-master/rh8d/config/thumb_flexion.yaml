@@ -1,0 +1,12 @@
+thumb_flexion_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: thumb_flexion
+    joint_speed: 5
+    motor:
+        id: 35
+        init: 2048
+        min: 0
+        max: 4095

@@ -1,0 +1,81 @@
+<launch>
+    <node name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: dxl_manager
+            serial_ports:
+                rh8d_port:
+                    port_name: "/dev/ttyUSB1"
+                    baud_rate: 1000000
+                    min_motor_id: 30
+                    max_motor_id: 38
+                    update_rate: 20
+        </rosparam>
+    </node>
+
+    <node name="sensorglove_to_rh8d" pkg="rh8d" type="sensorglove_to_rh8d.py"
+            output="screen"/>
+
+    <!-- Start wrist_rotation joint controller -->
+    <rosparam file="$(find rh8d)/config/wrist_rotation.yaml" command="load"/>
+    <node name="wrist_rotation_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                wrist_rotation_controller"
+          output="screen"/>
+
+    <!-- Start wrist_adduction joint controller -->
+    <rosparam file="$(find rh8d)/config/wrist_adduction.yaml" command="load"/>
+    <node name="wrist_adduction_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                wrist_adduction_controller"
+          output="screen"/>
+
+    <!-- Start wrist_flexion joint controller -->
+    <rosparam file="$(find rh8d)/config/wrist_flexion.yaml" command="load"/>
+    <node name="wrist_flexion_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                wrist_flexion_controller"
+          output="screen"/>
+
+    <!-- Start thumb_adduction joint controller -->
+    <rosparam file="$(find rh8d)/config/thumb_adduction.yaml" command="load"/>
+    <node name="thumb_adduction_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                thumb_adduction_controller"
+          output="screen"/>
+
+    <!-- Start thumb_flexion joint controller -->
+    <rosparam file="$(find rh8d)/config/thumb_flexion.yaml" command="load"/>
+    <node name="thumb_flexion_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                thumb_flexion_controller"
+          output="screen"/>
+
+    <!-- Start index_flexion joint controller -->
+    <rosparam file="$(find rh8d)/config/index_flexion.yaml" command="load"/>
+    <node name="index_flexion_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                index_flexion_controller"
+          output="screen"/>
+
+    <!-- Start middle_finger_flexion joint controller -->
+    <rosparam file="$(find rh8d)/config/middle_finger_flexion.yaml" command="load"/>
+    <node name="middle_finger_flexion_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                middle_finger_flexion_controller"
+          output="screen"/>
+
+    <!-- Start ring_pinkie_flexion joint controller -->
+    <rosparam file="$(find rh8d)/config/ring_pinkie_flexion.yaml" command="load"/>
+    <node name="ring_pinkie_flexion_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port rh8d_port
+                ring_pinkie_flexion_controller"
+          output="screen"/>
+</launch>
